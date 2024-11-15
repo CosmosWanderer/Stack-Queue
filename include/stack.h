@@ -1,5 +1,6 @@
 #include <iostream>
 #include <utility>
+#include <vector>
 
 template <class T>
 class Stack 
@@ -107,4 +108,38 @@ public:
 	{
 		return sz == 0;
 	}
+
+
+
+
+	/* --- Задача --- */
+ 
+	// Сортировка на двух стеках. Т.к. это просто задача, решил не запариваться и просто отсортировать вектор интов
+	std::vector<int> stackSort(std::vector<int> vec) {
+		Stack<int> S1;
+		Stack<int> S2;
+
+		for (int i = 0; i < vec.size(); i++) {
+			while (!S1.empty() && S1.top() < vec[i]) {  
+				S2.push(S1.top());
+				S1.pop();
+			}
+			S1.push(vec[i]);
+			while (!S2.empty()) {
+				S1.push(S2.top());
+				S2.pop();
+			}
+		}
+
+		std::vector<int> sortedVec;
+
+		while (!S1.empty()) {
+			sortedVec.push_back(S1.top());
+			S1.pop();
+		}
+
+		return sortedVec;
+	}
+
+	// Демострация работы в конце test_stack.cpp
 };

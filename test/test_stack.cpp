@@ -1,5 +1,6 @@
 #include "stack.h"
 #include <gtest.h>
+#include <iostream>
 
 TEST(Stack, can_create_stack) {
 	EXPECT_NO_THROW(Stack<int> S);
@@ -164,4 +165,31 @@ TEST(Stack, push_and_pop_elements_in_right_order) {
 	S.pop();
 	EXPECT_EQ(S.top(), 3);
 	// 1 2 *3* _ _ _
+}
+
+/* --- Задача --- */
+
+// Сортировка на двух стеках
+TEST(Stack, stacksort) { 
+
+	std::vector<int> vec;
+	vec.push_back(7); 
+	vec.push_back(3);
+	vec.push_back(4);
+	vec.push_back(2);
+	vec.push_back(5); 
+	vec.push_back(6);
+	vec.push_back(1);
+
+	Stack<int> sort;
+
+	std::vector<int> sortedVec = sort.stackSort(vec); 
+
+	bool isSorted = 1;
+	
+	for (int i = 0; i < sortedVec.size(); i++) {
+		if (sortedVec[i] != i + 1) isSorted = 0;
+	}
+
+	EXPECT_TRUE(isSorted);
 }
